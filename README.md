@@ -1,2 +1,1 @@
 # Luck_pro
-# oooooooo
