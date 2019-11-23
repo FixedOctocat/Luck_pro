@@ -9,7 +9,7 @@ function init () {
             newSquare = new ymaps.Rectangle([[counterlon / cofflon,counterlat / cofflat],[(counterlon + 1) / cofflon, (counterlat + 1) / cofflat]],{},{fillColor: '#7df9ff33',fillOpacity: 0.5});
             myMap.geoObjects.add(newSquare);
         }
-        districs.push[part];
+        districs.push(part);
     }
 };
 
