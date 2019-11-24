@@ -35,11 +35,11 @@ def posts_get(m):
     l = m[1]
     right_high_latitude, right_high_longitude = h
     left_down_latitude, left_down_longitude = l
-    posts_near = get_text_from_post('мое настроение', latitude=right_high_latitude, longitude=right_high_longitude, count=30)
+    posts_near = get_text_from_post('мое настроение', latitude=(right_high_latitude-left_down_latitude)/2, longitude=(right_high_longitude-left_down_longitude)/2, count=100)
     posts = []
     for i in range(30):
-        lat = posts_near['items'][i]['place']['latitude']
-        lon = posts_near['items'][i]['place']['longitude']
+        lat = posts_near['items'][i]['geo']['place']['latitude']
+        lon = posts_near['items'][i]['geo']['place']['longitude']
         f = is_point_in_square(right_high_latitude, right_high_longitude, left_down_latitude, left_down_longitude, lat, lon)
         if f:
             posts.append(posts_near['items'][i]['text'])
