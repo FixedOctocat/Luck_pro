@@ -2,7 +2,7 @@ import vk_api
 with open('C:/Users/user/Desktop/access_token.txt', 'r') as file:
     access_token = file.readline().strip()
 session = vk_api.VkApi(login='89168069175', token=access_token, scope=262144+4096)
-session.auth()
+session.auth(token_only=True)
 vk = session.get_api()
 
 
@@ -29,7 +29,12 @@ def is_point_in_square(right_high_latitude, right_high_longitude, left_down_lati
         flag = False
     return flag
 
-def posts_get(right_high_latitude, right_high_longitude, left_down_latitude, left_down_longitude):
+
+def posts_get(m):
+    h = m[0]
+    l = m[1]
+    right_high_latitude, right_high_longitude = h
+    left_down_latitude, left_down_longitude = l
     posts_near = get_text_from_post('мое настроение', latitude=right_high_latitude, longitude=right_high_longitude, count=30)
     posts = []
     for i in range(30):
