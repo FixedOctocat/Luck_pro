@@ -1,4 +1,4 @@
-def coordinatessender():
+def square_centers():
     cofflat, cofflon = 100, 200
     squares = []
     for counterlon in range(11114,11180):
