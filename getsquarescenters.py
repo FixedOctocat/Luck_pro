@@ -6,3 +6,4 @@ def coordinatessender():
         for counterlat in range(3737,3783):
             line.append([[counterlon / cofflon,counterlat / cofflat],[(counterlon + 1) / cofflon, (counterlat + 1) / cofflat]])
         squares.append(line)
+    return squares
