@@ -18,7 +18,4 @@ def tonal_analize(string):
 	    
 	    delta = positive - negative
 	    
-	    if delta > 0:
-	    	return delta
-	    else:
-	    	return delta
+	return delta
