@@ -1,23 +1,45 @@
-function init () {
-    var districs = [], part = [];
-    var cofflon = 200, startlon = 11114, stoplon = 11180;
-    var cofflat = 100, startlat = 3737, stoplat = 3783;
-    var myMap = new ymaps.Map('map',{center: [55.753960, 37.620393],zoom: 12,controls:['zoomControl']});
-    for(var counterlon = startlon; counterlon <= stoplon; counterlon++){
-        part = [];
-        for(var counterlat = startlat; counterlat <= stoplat; counterlat++){
-            newSquare = new ymaps.Rectangle([[counterlon / cofflon,counterlat / cofflat],[(counterlon + 1) / cofflon, (counterlat + 1) / cofflat]],{},{fillColor: '#7df9ff33',fillOpacity: 0.5});
-            myMap.geoObjects.add(newSquare);
-        }
-        districs.push(part);
-    }
-};
-
-function fillSquare(ids){
-    var counter = 0;
-    for(;counter < ids.lenght(); counter++){
-        
-    }
+function div(val, by){
+    return (val - val % by) / by;
 }
 
-ymaps.ready(init);
+function init(egor_square){
+    return function(){
+        myMap = new ymaps.Map('map',{center: [55.753960, 37.620393],zoom: 12.5,controls:['zoomControl']});
+        districs = [], part = [];
+        for(var counterlon = 0; counterlon < egor_square.length; counterlon++){
+            part = [];
+            for(var counterlat = 0; counterlat < egor_square[counterlon].length; counterlat++){
+                if (egor_square[counterlon][counterlat][2] >= 0){
+                    red = 0;
+                    green = Math.ceil(255 * egor_square[counterlon][counterlat][2]);
+                } else {
+                    green = 0;
+                    red = Math.ceil(255 * -egor_square[counterlon][counterlat][2]);
+                };
+                color = 'rgb(' + red.toString() + ',' + green.toString() + ',0)';
+                coords = egor_square[counterlon][counterlat]
+                newSquare = new ymaps.Rectangle(coords.slice(0,2),{},{fillColor: color,fillOpacity: 0.5})
+                console.log(newSquare)
+                part.push(newSquare);
+            }
+            districs.push(part);
+        }
+    }
+};
+godef = [[[[55.57, 37.37], [55.575, 37.38], 0.7777253209378436], [[55.57, 37.38], [55.575, 37.39], 0.5891686084953953]]];
+
+ymaps.ready(init(godef));
+
+function fillSquare(ids){
+    return function(){
+        for(var counter = 0;counter < ids.length; counter++){
+            var gor = 46, gorid = ids[counter] % gor, verid = div(ids[counter],gor);
+            console.log(verid,gorid,districs[verid][gorid])
+            myMap.geoObjects.add(districs[verid][gorid]);
+        }
+        console.log(1111111111111)
+    }
+    
+}
+
+ymaps.ready(fillSquare([0,1]));
