@@ -26,9 +26,6 @@ function init(egor_square){
         }
     }
 };
-godef = [[[[55.57, 37.37], [55.575, 37.38], 0.7777253209378436], [[55.57, 37.38], [55.575, 37.39], 0.5891686084953953]]];
-
-ymaps.ready(init(godef));
 
 function fillSquare(ids){
     return function(){
@@ -41,5 +38,3 @@ function fillSquare(ids){
     }
     
 }
-
-ymaps.ready(fillSquare([0,1]));
