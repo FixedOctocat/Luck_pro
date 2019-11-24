@@ -1,6 +1,6 @@
 import vk_api
-
-access_token = '37e11a35406c1e97a304843f18c35da943c564d3bb3f4c28a20600d691fe66ac899cfc15d4abb79cc7fe6'
+with open('C:/Users/user/Desktop/access_token.txt', 'r') as file:
+    access_token = file.readline().strip()
 session = vk_api.VkApi(login='89168069175', token=access_token, scope=262144+4096)
 session.auth()
 vk = session.get_api()
